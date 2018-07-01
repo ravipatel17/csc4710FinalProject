@@ -33,9 +33,17 @@
 			
 			<br>
 
-			<a href="<c:url value='/jsps/coauthors.jsp'/>" target="body">Search Co-authors</a>&nbsp;
+			<a href="<c:url value='/jsps/coauthors.jsp'/>" target="body" >Search Co-authors</a>&nbsp;
 			<br>
 			<a href="<c:url value='/jsps/AssignPCMember.jsp'/>" target="body">Assign PC Member</a>&nbsp;
+			<br>
+			<a href="<c:url value='/Queryresult/ReviewMostPaper.jsp'/>" target="body">List the PC Member who reviewed the most papers</a>
+			<br>
+			<a href="<c:url value='/Queryresult/NoReview.jsp'/>" target="body">List the PC Member are not assigned to a review</a>
+			<br>
+			<a href="<c:url value='/Queryresult/RejectedMattJohn.jsp'/>" target="body">List the papers rejected by Matt and John</a>
+			<br>
+			<a href="<c:url value='/Queryresult/AcceptedPapers.jsp'/>" target="body">List the accepted papers</a>
 			<br>
 			
 		<form action="edit.jsp"> 
