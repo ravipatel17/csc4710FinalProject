@@ -29,19 +29,14 @@
 		<c:otherwise>
 			<form action="<c:url value='/initialize'/>" method="post">
 			<input type="submit" name="initialize" value="initialize"/>
-			</form>
-			<form action="<c:url value='/AssignReview'/>" method="post">
-			<input type="hidden" name="method" value="regist"/>
-			PCMember1:<input type="text" name="pcmember1"/> 
-			<br/>
-			PCMember2：<input type="text" name="pcmember2"/>
-			<br/>
-			PCMember3<input type="text" name="pcmember3"/>
-			<br/>
-			Paperid:<input type="text" name = "paperid"/>
-			<input type="submit" value="Assign"/>
-			</form>
-			<br> 
+			</form> 
+			
+			<br>
+
+			<a href="<c:url value='/jsps/coauthors.jsp'/>" target="body">Search Co-authors</a>&nbsp;
+			<br>
+			<a href="<c:url value='/jsps/AssignPCMember.jsp'/>" target="body">Assign PC Member</a>&nbsp;
+			<br>
 			
 		<form action="edit.jsp"> 
 		<input type ="submit" name="Edit Pc Members" value="Edit Pc Members" /> 
