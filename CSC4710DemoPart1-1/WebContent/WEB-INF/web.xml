@@ -61,6 +61,16 @@
     <servlet-name>NoReview</servlet-name>
     <url-pattern>/NoReview</url-pattern>
   </servlet-mapping>
+  <servlet>
+  <description></description>
+    <display-name>MostReviews</display-name>
+    <servlet-name>MostReviews</servlet-name>
+    <servlet-class>user.web.servlet.MostReviews</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MostReviews</servlet-name>
+    <url-pattern>/MostReviews</url-pattern>
+  </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>login.jsp</welcome-file>
