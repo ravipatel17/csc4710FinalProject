@@ -1,5 +1,5 @@
 package user.web.servlet;
-import ListObjects.PCMember;
+import ListObjects.Paper;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,7 +26,7 @@ import java.util.Date;
  * Servlet implementation class initialize
  */
 
-public class NoReview extends HttpServlet {
+public class RejectedMattJohn extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static Connection connect = null;
 	 private static Statement statement = null;
@@ -52,24 +52,24 @@ public class NoReview extends HttpServlet {
 			              + "user=root&password=root");
 		      
 		     
-		      String sql = "select name,email from pcmember where pcmemberID not in (select pcmemberID from review);";
+		      String sql = "select *  from paper t1, review r1, review r2 where r1.recommendation = \"n\" AND r2.recommendation = \"n\" AND (r1.pcmemberID = (select pcmemberID from pcmember where name = \"matt\")) AND (r2.pcmemberID = (Select pcmemberID from pcmember where name = \"john\")) AND t1.paperid = r1.paperid and t1.paperid = r2.paperid;";
 				 preparedStatement = connect.prepareStatement(sql); 
 				rs = preparedStatement.executeQuery();
-			List<PCMember> list = new ArrayList<PCMember>();  
+			List<Paper> list = new ArrayList<Paper>();  
 		      while(rs.next())
 		      {
-		    	  PCMember pcmember = new PCMember(rs.getString("name"), rs.getString("email"));
-		    	  list.add(pcmember);
-		    	  pcmember = null;
+		    	  Paper paper = new Paper(rs.getInt("paperid"), rs.getString("title"));
+		    	  list.add(paper);
+		    	  paper = null;
 		      }
-		      request.setAttribute("PCMemberList", list);
+		      request.setAttribute("PaperList", list);
 		    } catch (Exception e) {
 		         System.out.println(e);
 		    } finally {
 		      close();
 		    }
 	      
-		request.getRequestDispatcher("/Queryresult/NoReviews.jsp").forward(request, response);
+		request.getRequestDispatcher("/Queryresult/RejectedMattJohn.jsp").forward(request, response);
 	}
 	private static void close() {
 	    try {

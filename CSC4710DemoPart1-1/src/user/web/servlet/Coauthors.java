@@ -1,5 +1,5 @@
 package user.web.servlet;
-import ListObjects.PCMember;
+import ListObjects.Paper;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,7 +26,7 @@ import java.util.Date;
  * Servlet implementation class initialize
  */
 
-public class NoReview extends HttpServlet {
+public class Coauthors extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static Connection connect = null;
 	 private static Statement statement = null;
@@ -45,31 +45,35 @@ public class NoReview extends HttpServlet {
 		// TODO Auto-generated method stub
 		try{
 		      // This will load the MySQL driver, each DB has its own driver
+			System.out.println("serverlet ran");
 		      Class.forName("com.mysql.jdbc.Driver");
 		      // Setup the connection with the DB
 		      connect = DriverManager
 		          .getConnection("jdbc:mysql://localHost:3306/sampledb?"
 			              + "user=root&password=root");
 		      
-		     
-		      String sql = "select name,email from pcmember where pcmemberID not in (select pcmemberID from review);";
+		     String firstName = request.getParameter("coauthor1");
+		     String secondName = request.getParameter("coauthor2");
+		      String sql = "select * from paper, writes t1, writes t2 where t1.email = (select email from author where name = (?)) AND t2.email = (select email from author where name = (?)) AND t1.paperid = t2.paperid AND paper.paperid = t1.paperid;";
 				 preparedStatement = connect.prepareStatement(sql); 
+				 preparedStatement.setString(1, firstName);
+				 preparedStatement.setString(2, secondName);
 				rs = preparedStatement.executeQuery();
-			List<PCMember> list = new ArrayList<PCMember>();  
+			List<Paper> list = new ArrayList<Paper>();  
 		      while(rs.next())
 		      {
-		    	  PCMember pcmember = new PCMember(rs.getString("name"), rs.getString("email"));
-		    	  list.add(pcmember);
-		    	  pcmember = null;
+		    	  Paper paper = new Paper(rs.getInt("paperid"), rs.getString("title"));
+		    	  list.add(paper);
+		    	  paper = null;
 		      }
-		      request.setAttribute("PCMemberList", list);
+		      request.setAttribute("PaperList", list);
 		    } catch (Exception e) {
 		         System.out.println(e);
 		    } finally {
 		      close();
 		    }
 	      
-		request.getRequestDispatcher("/Queryresult/NoReviews.jsp").forward(request, response);
+		request.getRequestDispatcher("/Queryresult/CoauthorsTable.jsp").forward(request, response);
 	}
 	private static void close() {
 	    try {

@@ -1,5 +1,5 @@
 package user.web.servlet;
-import ListObjects.PCMember;
+import ListObjects.Paper;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,7 +26,7 @@ import java.util.Date;
  * Servlet implementation class initialize
  */
 
-public class NoReview extends HttpServlet {
+public class AcceptedPapers extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static Connection connect = null;
 	 private static Statement statement = null;
@@ -52,24 +52,24 @@ public class NoReview extends HttpServlet {
 			              + "user=root&password=root");
 		      
 		     
-		      String sql = "select name,email from pcmember where pcmemberID not in (select pcmemberID from review);";
+		      String sql = "Select distinct  t1.paperid, title from paper t1, review t2, review t3 where t2.pcmemberid <> t3.pcmemberid AND t1.paperid = t2.paperid AND t1.paperid = t3.paperid AND t2.recommendation = \"y\" AND t3.recommendation = \"y\";";
 				 preparedStatement = connect.prepareStatement(sql); 
 				rs = preparedStatement.executeQuery();
-			List<PCMember> list = new ArrayList<PCMember>();  
+			List<Paper> list = new ArrayList<Paper>();  
 		      while(rs.next())
 		      {
-		    	  PCMember pcmember = new PCMember(rs.getString("name"), rs.getString("email"));
-		    	  list.add(pcmember);
-		    	  pcmember = null;
+		    	  Paper paper = new Paper(rs.getInt("paperid"), rs.getString("title"));
+		    	  list.add(paper);
+		    	  paper = null;
 		      }
-		      request.setAttribute("PCMemberList", list);
+		      request.setAttribute("PaperList", list);
 		    } catch (Exception e) {
 		         System.out.println(e);
 		    } finally {
 		      close();
 		    }
 	      
-		request.getRequestDispatcher("/Queryresult/NoReviews.jsp").forward(request, response);
+		request.getRequestDispatcher("/Queryresult/AcceptedPapers.jsp").forward(request, response);
 	}
 	private static void close() {
 	    try {
@@ -95,3 +95,4 @@ public class NoReview extends HttpServlet {
 	  }
 
 }
+

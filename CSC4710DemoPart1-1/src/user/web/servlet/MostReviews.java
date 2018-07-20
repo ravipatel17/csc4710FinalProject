@@ -52,7 +52,7 @@ public class MostReviews extends HttpServlet {
 			              + "user=root&password=root");
 		      
 		     
-		      String sql = "Select name, pcmember.email from pcmember, (select email, count(*) As reviews from review group by email) t2 where pcmember.email = t2.email and reviews = (Select Max(reviews) from (select email, count(*) As reviews from review group by email) t3)";
+		      String sql = "Select name, pcmember.email from pcmember, (select pcmemberID, count(*) As reviews from review group by pcmemberID) t2 where pcmember.pcmemberID = t2.pcmemberID and reviews = (Select Max(reviews) from (select pcmemberID, count(*) As reviews from review group by pcmemberID) t3)";
 				 preparedStatement = connect.prepareStatement(sql); 
 				rs = preparedStatement.executeQuery();
 			List<PCMember> list = new ArrayList<PCMember>();  

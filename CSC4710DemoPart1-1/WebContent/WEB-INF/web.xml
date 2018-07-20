@@ -71,6 +71,36 @@
     <servlet-name>MostReviews</servlet-name>
     <url-pattern>/MostReviews</url-pattern>
   </servlet-mapping>
+  <servlet>
+  <description></description>
+    <display-name>RejectedMattJohn</display-name>
+    <servlet-name>RejectedMattJohn</servlet-name>
+    <servlet-class>user.web.servlet.RejectedMattJohn</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RejectedMattJohn</servlet-name>
+    <url-pattern>/RejectedMattJohn</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  <description></description>
+    <display-name>SearchCoauthors</display-name>
+    <servlet-name>SearchCoauthors</servlet-name>
+    <servlet-class>user.web.servlet.Coauthors</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchCoauthors</servlet-name>
+    <url-pattern>/SearchCoauthors</url-pattern>
+  </servlet-mapping>
+   <servlet>
+  <description></description>
+    <display-name>AcceptedPapers</display-name>
+    <servlet-name>AcceptedPapers</servlet-name>
+    <servlet-class>user.web.servlet.AcceptedPapers</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AcceptedPapers</servlet-name>
+    <url-pattern>/AcceptedPapers</url-pattern>
+  </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>login.jsp</welcome-file>
