@@ -60,12 +60,15 @@ public class initialize extends HttpServlet {
 		      statement.executeUpdate("DROP TABLE IF EXISTS paper;");
 		      
 		     
+
 		      String sqlstmt = "Create table paper( paperid integer Auto_Increment, title varchar(50), abstract varchar(250), pdf varchar(100), primary key (paperid));"; 
+
 		      statement.executeUpdate(sqlstmt); 
 		      
 		      sqlstmt = "Create table author(email varchar(100), name varchar(50), affiliation varchar(100), primary key(email));"; 
 		      statement.executeUpdate(sqlstmt);
 		      	      
+
 		      sqlstmt = "Create table writes(paperid integer Auto_Increment, email varchar(50), ContNum integer, Primary Key (paperid,email), foreign key (paperid) references paper(paperid), foreign key (email) references author(email));"; 
 		      statement.executeUpdate(sqlstmt);
 		      
@@ -115,6 +118,68 @@ public class initialize extends HttpServlet {
 		          preparedStatement.setString(1, "title10");
 		          preparedStatement.setString(2, "abstract10");
 		          preparedStatement.setString(3, "pdf10");
+
+		      sqlstmt = "Create table writes(paperid integer, email varchar(50), orders integer, Primary Key (paperid,email), foreign key (paperid) references paper(paperid), foreign key (email) references author(email));"; 
+		      statement.executeUpdate(sqlstmt);
+		      
+		      sqlstmt = "Create table pcmember( email varchar(50), name varchar(20), primary key(email));"; 
+		      statement.executeUpdate(sqlstmt);
+
+		      sqlstmt = "create table review(reportid integer, sdate DATE, comment varchar(250), recommendation char(1), paperid integer, email varchar(100), unique(paperid, email), foreign key (paperid) references paper(paperid), foreign key (email) references pcmember(email));"; 
+		      statement.executeUpdate(sqlstmt);
+		      
+		      preparedStatement = connect
+		              .prepareStatement("insert into  paper(paperid, title, abstract,pdf) values (?, ?, ?,?)");
+		          preparedStatement.setString(1, "1");
+		          preparedStatement.setString(2, "title1");
+		          preparedStatement.setString(3, "abstract1");
+		          preparedStatement.setString(4, "pdf1");
+		          preparedStatement.executeUpdate();
+		          preparedStatement.setString(1, "2");
+		          preparedStatement.setString(2, "title2");
+		          preparedStatement.setString(3, "abstract2");
+		          preparedStatement.setString(4, "pdf2");
+		          preparedStatement.executeUpdate();
+		          preparedStatement.setString(1, "3");
+		          preparedStatement.setString(2, "title3");
+		          preparedStatement.setString(3, "abstract3");
+		          preparedStatement.setString(4, "pdf3");
+		          preparedStatement.executeUpdate();
+		          preparedStatement.setString(1, "4");
+		          preparedStatement.setString(2, "title4");
+		          preparedStatement.setString(3, "abstract4");
+		          preparedStatement.setString(4, "pdf4");
+		          preparedStatement.executeUpdate();
+		          preparedStatement.setString(1, "5");
+		          preparedStatement.setString(2, "title5");
+		          preparedStatement.setString(3, "abstract5");
+		          preparedStatement.setString(4, "pdf5");
+		          preparedStatement.executeUpdate();
+		          preparedStatement.setString(1, "6");
+		          preparedStatement.setString(2, "title6");
+		          preparedStatement.setString(3, "abstract6");
+		          preparedStatement.setString(4, "pdf6");
+		          preparedStatement.executeUpdate();
+		          preparedStatement.setString(1, "7");
+		          preparedStatement.setString(2, "title7");
+		          preparedStatement.setString(3, "abstract7");
+		          preparedStatement.setString(4, "pdf7");
+		          preparedStatement.executeUpdate();
+		          preparedStatement.setString(1, "8");
+		          preparedStatement.setString(2, "title8");
+		          preparedStatement.setString(3, "abstract8");
+		          preparedStatement.setString(4, "pdf8");
+		          preparedStatement.executeUpdate();
+		          preparedStatement.setString(1, "9");
+		          preparedStatement.setString(2, "title9");
+		          preparedStatement.setString(3, "abstract9");
+		          preparedStatement.setString(4, "pdf9");
+		          preparedStatement.executeUpdate();
+		          preparedStatement.setString(1, "10");
+		          preparedStatement.setString(2, "title10");
+		          preparedStatement.setString(3, "abstract10");
+		          preparedStatement.setString(4, "pdf10");
+
 		          preparedStatement.executeUpdate();
 		          preparedStatement = connect
 			              .prepareStatement("insert into  author(email, name, affiliation) values (?, ?, ?)");
@@ -159,7 +224,9 @@ public class initialize extends HttpServlet {
 		          preparedStatement.setString(3, "affiliation10");
 		          preparedStatement.executeUpdate();
 		      preparedStatement = connect
+
 			              .prepareStatement("insert into  writes(paperid, email, ContNum) values (?, ?, ?)");
+
 		      preparedStatement.setString(1, "1");
 	          preparedStatement.setString(2, "email1@gmail.com");
 	          preparedStatement.setString(3, "1");
@@ -226,6 +293,7 @@ public class initialize extends HttpServlet {
 	          preparedStatement.setString(1, "pcmember8@gmail.com");
 	          preparedStatement.setString(2, "pcmember8");
 	          preparedStatement.executeUpdate();
+
 	          preparedStatement.setString(1, "john@gmail.com");
 	          preparedStatement.setString(2, "john");
 	          preparedStatement.executeUpdate();
@@ -234,75 +302,88 @@ public class initialize extends HttpServlet {
 	          preparedStatement.executeUpdate();
 	          preparedStatement = connect
 		              .prepareStatement("insert into review(reportid, subDate, description,recommendation, paperid, pcmemberid) values (?, ?, ?, ?, ?, ?)");
+
+	          preparedStatement.setString(1, "pcmember9@gmail.com");
+	          preparedStatement.setString(2, "pcmember9");
+	          preparedStatement.executeUpdate();
+	          preparedStatement.setString(1, "pcmember10@gmail.com");
+	          preparedStatement.setString(2, "pcmember10");
+	          preparedStatement.executeUpdate();
+	          preparedStatement = connect
+		              .prepareStatement("insert into review(reportid, sdate, comment,recommendation, paperid, email) values (?, ?, ?, ?, ?, ?)");
+
 	          preparedStatement.setString(1, "1");
 	          preparedStatement.setString(2, "2018-06-11");
 	          preparedStatement.setString(3, "none");
 	          preparedStatement.setString(4, "y");
 	          preparedStatement.setString(5, "1");
+
 	          preparedStatement.setString(6, "1");
+
 	          preparedStatement.executeUpdate();
 	          preparedStatement.setString(1, "2");
 	          preparedStatement.setString(2, "2018-06-11");
 	          preparedStatement.setString(3, "none");
 	          preparedStatement.setString(4, "y");
 	          preparedStatement.setString(5, "1");
+
 	          preparedStatement.setString(6, "2");
+
+
 	          preparedStatement.executeUpdate();
 	          preparedStatement.setString(1, "3");
 	          preparedStatement.setString(2, "2018-06-11");
 	          preparedStatement.setString(3, "none");
 	          preparedStatement.setString(4, "y");
 	          preparedStatement.setString(5, "1");
+
 	          preparedStatement.setString(6, "3");
+
 	          preparedStatement.executeUpdate();
 	          preparedStatement.setString(1, "4");
 	          preparedStatement.setString(2, "2018-06-11");
 	          preparedStatement.setString(3, "none");
 	          preparedStatement.setString(4, "y");
 	          preparedStatement.setString(5, "2");
-	          preparedStatement.setString(6, "4");
+
 	          preparedStatement.executeUpdate();
 	          preparedStatement.setString(1, "5");
 	          preparedStatement.setString(2, "2018-06-11");
 	          preparedStatement.setString(3, "none");
 	          preparedStatement.setString(4, "y");
 	          preparedStatement.setString(5, "2");
-	          preparedStatement.setString(6, "5");
+
 	          preparedStatement.executeUpdate();
 	          preparedStatement.setString(1, "6");
 	          preparedStatement.setString(2, "2018-06-11");
 	          preparedStatement.setString(3, "none");
 	          preparedStatement.setString(4, "y");
 	          preparedStatement.setString(5, "2");
-	          preparedStatement.setString(6, "6");
+
 	          preparedStatement.executeUpdate();
 	          preparedStatement.setString(1, "7");
 	          preparedStatement.setString(2, "2018-06-11");
 	          preparedStatement.setString(3, "none");
 	          preparedStatement.setString(4, "y");
 	          preparedStatement.setString(5, "3");
-	          preparedStatement.setString(6, "7");
+
 	          preparedStatement.executeUpdate();
 	          preparedStatement.setString(1, "8");
 	          preparedStatement.setString(2, "2018-06-11");
 	          preparedStatement.setString(3, "none");
 	          preparedStatement.setString(4, "y");
 	          preparedStatement.setString(5, "3");
-	          preparedStatement.setString(6, "8");
+
 	          preparedStatement.executeUpdate();
 	          preparedStatement.setString(1, "9");
 	          preparedStatement.setString(2, "2018-06-11");
 	          preparedStatement.setString(3, "none");
-	          preparedStatement.setString(4, "n");
-	          preparedStatement.setString(5, "4");
-	          preparedStatement.setString(6, "9");
+
 	          preparedStatement.executeUpdate();
 	          preparedStatement.setString(1, "10");
 	          preparedStatement.setString(2, "2018-06-11");
 	          preparedStatement.setString(3, "none");
-	          preparedStatement.setString(4, "n");
-	          preparedStatement.setString(5, "4");
-	          preparedStatement.setString(6, "10");
+
 	          preparedStatement.executeUpdate();
 		    } catch (Exception e) {
 		         System.out.println(e);
