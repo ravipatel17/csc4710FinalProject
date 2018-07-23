@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,11 +16,15 @@
 		<th>PaperID</th>
 		<th>Title</th>
 	</tr>
-<c:forEach items="${PaperList}" var="user">
+
+<c:forEach items="${PaperList}" var="paper">
 	<tr>
-		<td>${Paper.paperid }</td>
-		<td>${Paper.title }</td>
+		<td>${paper.paperid }</td>
+		<td>${paper.title }</td>
 	</tr>
 </c:forEach>
+</table>
+
+
 </body>
 </html>
